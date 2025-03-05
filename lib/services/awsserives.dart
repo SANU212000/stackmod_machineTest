@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AWSS3Service {
-  final String baseApiUrl =
-      "https://filesapisample.stackmod.info/api/presigned-url";
+  final String baseApiUrl = dotenv.env['BASE_API_URL'] ?? 'DEFAULT_VALUE_HERE';
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<String?> uploadFile(File file, String userId) async {

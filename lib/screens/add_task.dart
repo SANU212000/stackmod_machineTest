@@ -137,7 +137,6 @@ class TaskListScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Add Task Button
               ElevatedButton(
                 onPressed: () {
                   UserController userController = Get.find<UserController>();

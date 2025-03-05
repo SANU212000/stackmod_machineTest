@@ -119,7 +119,7 @@ class UserController extends GetxController {
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('sessionId');
-    Get.find<TodoController>().todos.clear();
+    Get.find<TodoController>().clearTodos();
     _clearUserDetails();
     Get.offAllNamed('/userScreen');
   }

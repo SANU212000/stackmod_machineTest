@@ -65,6 +65,8 @@ class AuthMethods {
 
       UserController userController = Get.find<UserController>();
       await userController.fetchUserDetails();
+      TodoController todoController = Get.find<TodoController>();
+      await todoController.fetchTodos(result.user!.uid);
 
       print(
         "✅ User logged in: ${userController.username.value}, userId: ${userController.userId.value}",

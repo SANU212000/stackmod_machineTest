@@ -16,6 +16,7 @@ class TodoController extends GetxController {
   var filteredTasks = <Todo>[].obs;
 
   Future<void> fetchTodos(String userId) async {
+    todos.clear();
     isLoading(true);
     try {
       if (userId.isEmpty) return;
@@ -189,7 +190,7 @@ class TodoController extends GetxController {
   Future<void> markTasksAsCompleted(List<String> taskIds, String userId) async {
     if (taskIds.isEmpty || userId.isEmpty) return;
 
-    WriteBatch batch = _firestore.batch(); 
+    WriteBatch batch = _firestore.batch();
 
     try {
       for (String taskId in taskIds) {
@@ -205,11 +206,20 @@ class TodoController extends GetxController {
       }
 
       await batch.commit();
-      fetchTodos(userId); 
+      fetchTodos(userId);
 
       print("✅ Successfully marked tasks as completed!");
     } catch (e) {
       print("❌ Error marking tasks as completed: $e");
     }
+  }
+
+  void clearTodos() {
+    todos.clear();
+    pendingCount.value = 0;
+    inProgressCount.value = 0;
+    completedCount.value = 0;
+    overdueCount.value = 0;
+    filteredTasks.clear();
   }
 }
